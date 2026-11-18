@@ -4,6 +4,20 @@ Compare real kilometer crossings against a planned running pace without opening 
 
 Use marked kilometers on a course or a treadmill to check your cumulative pace. The calculation uses the moment you press the button, so a GPS signal or phone connection is unnecessary.
 
+## Screen transitions
+
+Mark a crossing and switch between the pace and elapsed-time readings.
+
+![Pace Lantern front display. Mark a crossing and switch between the pace and elapsed-time readings.](media/guide/screen-transitions.gif)
+
+<details>
+
+<summary>Watch the rear display</summary>
+
+![Pace Lantern rear display during the recorded controls](media/guide/screen-transitions-rear.gif)
+
+</details>
+
 ## Mark a kilometer crossing
 
 1. Before starting, turn the wheel to choose a pace per kilometer in five-second steps. Click when the clock should begin.
@@ -34,6 +48,6 @@ Open BUSY Bar Emulator. From this repository, run:
 
 Press **Back** to exit.
 
-The GIFs are excerpts from the emulator recording. Each front-display pixel is shown at 9× its original width and height. The end frames pause for reading.
+The GIFs are excerpts from the emulator recording. Each LED occupies a 16 × 16 cell with a black border. The end frames pause for reading.
 
 [Full recording](media/controls.mp4) · [Rear display](screenshots/back-1.png) · [Firmware test](EMULATOR-QA.md) · [MIT license](LICENSE)
