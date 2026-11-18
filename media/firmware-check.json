@@ -1,0 +1,15 @@
+{
+  "id": "BB-036",
+  "source": "Interactive device controls and persistent local state on BUSY Bar firmware.",
+  "scenario": "Adjusted the target pace, started the clock, marked kilometer one and opened elapsed time.",
+  "keys": [
+    "up",
+    "ok",
+    "ok",
+    "start"
+  ],
+  "frames": 54,
+  "distinct_frames": 17,
+  "exit": "App io.ncoooooper.pacelantern exited: finished; heap peak 80.8 of 128 KiB",
+  "sha256": "96ab94a1b51460b8da2d508fcc119dfc37b270ad9fa00957da2d3172d91c469f"
+}

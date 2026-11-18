@@ -1,0 +1,6 @@
+{
+  "category": "utilities",
+  "short_description": "Compare real kilometer crossings against a planned running pace without opening your phone.",
+  "description": "Compare real kilometer crossings against a planned running pace without opening your phone. Before the start use the wheel to select target pace per kilometer. Click starts the race and marks each subsequent kilometer. The screen shows the time gained or lost at the most recent crossing. Start toggles elapsed time. Hold Start resets a finished session.",
+  "changelog": "First public version."
+}

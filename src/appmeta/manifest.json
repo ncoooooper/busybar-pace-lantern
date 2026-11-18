@@ -4,6 +4,6 @@
   "name": "Pace Lantern",
   "version": "0.1.0",
   "api_version": "27.12.0",
-  "description": "Pace Lantern",
+  "description": "Compare real kilometer crossings against a planned running pace without opening your phone.",
   "author": "ncoooooper"
 }

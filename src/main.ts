@@ -1,66 +1,9 @@
-import { device } from "@shared/device";
-import { column, render, type Node } from "@busy-app/busy-lib";
-import manifest from "./appmeta/manifest.json";
+import {desk,duration} from "@shared/desk";
 
-/** The name the app draws under; the device clears elements by this id. */
-const APP = manifest.id;
-
-/** How often the screen is redrawn. */
-const TICK_MS = 1000;
-
-const WHITE = "#FFFFFFFF";
-const SUBTLE_WHITE = "#FFFFFF80";
-
-/**
- * The frame drawn on every tick. The screen is 72×16, so two short lines are about all that fits.
- */
-function frame(ticks: number): Node {
-  return column({ justify: "center", align: "center" }, [
-    { type: "text", id: "title", text: "Hello", font: "bold", color: WHITE },
-    {
-      type: "text",
-      id: "ticks",
-      text: String(ticks),
-      font: "small",
-      color: SUBTLE_WHITE,
-    },
-  ]);
-}
-
-/** Sends one frame to the device. */
-async function draw(ticks: number): Promise<void> {
-  const elements = render(frame(ticks));
-  await device.DisplayDraw({ application_name: APP, priority: 50, elements });
-}
-
-/**
- * Entry point, called at the end of the file: the device runs this script from top to bottom and starts nothing by itself.
- */
-function main(): void {
-  let ticks = 0;
-  let stopped = false;
-
-  const report = (err: unknown) =>
-    console.error(`${APP}: ${err instanceof Error ? err.message : String(err)}`);
-
-  void draw(ticks).catch(report);
-
-  // Tick errors are reported, not thrown: one failed request must not stop the loop.
-  const timer = setInterval(() => {
-    ticks += 1;
-    void draw(ticks).catch(report);
-  }, TICK_MS);
-
-  // Back leaves the app. Once the timer is cleared and the handler detached, nothing keeps it alive and the device takes the screen back.
-  const unbind = listen("input", (event) => {
-    if (stopped || event.key !== "back" || event.action !== "short") return;
-
-    stopped = true;
-    clearInterval(timer);
-
-    // Not detached from inside the handler itself: with nothing else left the unbind stops the app on the spot, while this handler is still running.
-    setTimeout(unbind, 0);
-  });
-}
-
-main();
+type S={pace:number;begin:number;km:number;cross:number;elapsed:boolean};
+desk<S>({name:"Pace Lantern",accent:"#ECA64C",motion:{"motif":"stations","color":"#ECA64C","shine":"#FFF0BB"},initial:()=>({pace:300,begin:0,km:0,cross:0,elapsed:false}),
+ render:(s,now)=>{const gap=s.cross-s.begin-s.km*s.pace*1000,shown=s.elapsed&&s.begin?duration(now-s.begin):s.km?(gap>0?"+":"-")+duration(Math.abs(gap)):duration(s.pace*1000);
+ return {title:!s.begin?"Target / km":s.elapsed?"Elapsed":s.km?"Split vs plan":"To first km",value:shown,lines:["Plan "+duration(s.pace*1000)+" / km","Distance "+s.km+" km",s.km?(gap>0?"Behind plan":"On or ahead of plan"):"Click at next kilometer","Click: mark kilometer","Start: elapsed / split","Hold Start: reset"]};},
+ action:(s,k,now)=>{if(k==="hold-start"){s.begin=0;s.km=0;s.cross=0;s.elapsed=false;}else if(k==="ok"){if(!s.begin)s.begin=now;else{s.km++;s.cross=now;}}
+ else if(k==="start")s.elapsed=!s.elapsed;else if(!s.begin&&(k==="up"||k==="down"))s.pace=Math.max(90,Math.min(1200,s.pace+(k==="up"?5:-5)));},
+ ticking:s=>Boolean(s.begin&&s.elapsed)});

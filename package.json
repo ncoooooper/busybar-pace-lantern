@@ -2,7 +2,7 @@
   "name": "busybar-pace-lantern",
   "private": true,
   "version": "0.1.0",
-  "description": "Pace Lantern",
+  "description": "Compare real kilometer crossings against a planned running pace without opening your phone.",
   "author": "ncoooooper",
   "type": "module",
   "scripts": {
