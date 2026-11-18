@@ -9,7 +9,7 @@
     "start"
   ],
   "frames": 54,
-  "distinct_frames": 17,
+  "distinct_frames": 18,
   "exit": "App io.ncoooooper.pacelantern exited: finished; heap peak 80.8 of 128 KiB",
-  "sha256": "96ab94a1b51460b8da2d508fcc119dfc37b270ad9fa00957da2d3172d91c469f"
+  "sha256": "6e4154c154f85dffe320fb03284f4fb935068575232d16e7dacd57cef6e21972"
 }
